@@ -3,17 +3,12 @@
 @using  ToreAurstadIT.BlazorEnumSelect.SampleClient.Models
 
 <EditForm Model="@model">
-
-    <p>Selected the some enum value: @model.SomeEnum</p>
-    @*<BlazorEnumSelect.Components.EnumSelectControl EnumType="typeof(SomeEnum)" TModel="SomeWrappingClassWithSomeEnum" For="@(m => m.SomeEnum)" />*@
-    @*<BlazorEnumSelect.Components.EnumSelectControl TModel="SomeWrappingClassWithSomeEnum" For="@(m => m.SomeEnum)" />*@
+    <span>Selected the some enum value: @model.SomeEnum</span>
     <ToreAurstadIT.BlazorEnumSelect.ClassLibrary.InputSelectEnum @bind-Value="@model.SomeEnum"
                                                     EmptyTextValue="-1" ShowIntValues="true" 
                                                     AdditionalCssClasses="custom-select">
     </ToreAurstadIT.BlazorEnumSelect.ClassLibrary.InputSelectEnum>
-
 </EditForm>
-
 
 @code{
     public SomeWrappingClassWithSomeEnum model = new SomeWrappingClassWithSomeEnum();
