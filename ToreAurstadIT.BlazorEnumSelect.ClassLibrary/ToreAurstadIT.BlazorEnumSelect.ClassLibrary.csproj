@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+
+	  <PackageId>BlazorEnumSelect.ToreAurstadIT</PackageId>
+	  <PackageVersion>1.0.0</PackageVersion>
+	  <Authors>Tore Aurstad IT</Authors>
+	  <Description>InputSelect control for Blazor supporting Enums and usage of Display attribute with localization and some extra functionality</Description>
+	  <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+	  <PackageReleaseNotes>First release</PackageReleaseNotes>
+	  <Copyright>Tore Aurstad IT</Copyright>
+	  <License>MIT</License>
+	  <PackageTags>logger logging logs</PackageTags>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\Readme.md" pack="true" PackagePath="." />
+	</ItemGroup>
+  
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+
+  <ItemGroup>
+	  <PackageReference Include="humanizer.core" Version="2.10.1" />
+	  <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.6" />
+  </ItemGroup>
+
+</Project>

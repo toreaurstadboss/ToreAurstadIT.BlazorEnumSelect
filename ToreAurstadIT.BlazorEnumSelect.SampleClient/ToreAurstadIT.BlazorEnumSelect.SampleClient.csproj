@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+  <PropertyGroup>
+	<TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+	  <PackageReference Include="Blazorise.Bootstrap" Version="0.9.3.6" />
+	  <PackageReference Include="Blazorise.Icons.FontAwesome" Version="0.9.3.6" />
+	  <PackageReference Include="Humanizer.Core" Version="2.10.1" />
+	  <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.0-*" />
+	  <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.0-*" PrivateAssets="all" />
+	  <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="5.0.0-*" />
+	  <PackageReference Include="System.Threading.Channels" Version="5.0.0-*" />
+
+	  <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ToreAurstadIT.BlazorEnumSelect.ClassLibrary\ToreAurstadIT.BlazorEnumSelect.ClassLibrary.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Resources\SomeResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SomeResources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\SomeResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SomeResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>
