@@ -3,7 +3,7 @@
 Install the package:
 
 ```powershell
-Install-Package ToreAurstadIT.BlazorEnumSelect
+Install-Package BlazorEnumSelect.ToreAurstadIT
 ```
 
 This razor class library contains a Blazor control that allows
