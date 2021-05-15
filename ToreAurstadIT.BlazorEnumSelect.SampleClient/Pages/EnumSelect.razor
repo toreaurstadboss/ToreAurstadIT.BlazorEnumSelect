@@ -4,12 +4,40 @@
 
 <EditForm Model="@model">
     <span>Selected the some enum value: @model.SomeEnum</span>
+
+    <span>Selected the some enum second value: @model.SomeEnumSecond</span>
+
+
     <ToreAurstadIT.BlazorEnumSelect.ClassLibrary.InputSelectEnum @bind-Value="@model.SomeEnum"
-                                                    EmptyTextValue="-1" ShowIntValues="true" 
-                                                    AdditionalCssClasses="custom-select">
+                                                                 EmptyTextValue="-1" ShowIntValues="true"
+                                                                 AdditionalCssClasses="custom-select">
     </ToreAurstadIT.BlazorEnumSelect.ClassLibrary.InputSelectEnum>
+
+    <ToreAurstadIT.BlazorEnumSelect.ClassLibrary.InputRadioGroupEnum @bind-Value="@model.SomeEnumSecond"
+                                                                     EmptyTextValue="-1" ShowIntValues="true"
+                                                                     AdditionalCssClasses="custom-select">
+    </ToreAurstadIT.BlazorEnumSelect.ClassLibrary.InputRadioGroupEnum>
+
+
+
+    @*<InputRadioGroup @bind-Value="temptest">
+            @foreach (var option in rdOptions)
+            {
+                <InputRadio Value="option" /> @option <br />
+            }
+        </InputRadioGroup>*@
+
+
+
+
 </EditForm>
 
 @code{
     public SomeWrappingClassWithSomeEnum model = new SomeWrappingClassWithSomeEnum();
+
+
+    public string temptest { get; set; }
+
+    List<string> rdOptions = new List<string> { "car", "bus", "auto" };
+
 }

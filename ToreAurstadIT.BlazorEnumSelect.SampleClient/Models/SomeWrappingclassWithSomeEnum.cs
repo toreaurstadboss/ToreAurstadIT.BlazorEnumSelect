@@ -3,5 +3,8 @@
     public class SomeWrappingClassWithSomeEnum
     {
         public SomeEnum SomeEnum { get; set; }
+
+        public SomeEnum SomeEnumSecond { get; set; }
+
     }
 }
