@@ -9,7 +9,7 @@ Image showing the two input controls /components included in this small library.
 You can adapt this sample to your convenience. I created this component to learn more about Blazor.
 It is built upon sample code from user meziantou on SO and packaged and added some functionality.
 
-Possible improvemen I would like to see in a fork:
+Possible improvement I would like to see in a fork:
 * In case your enum contains many values, a search / filtering capability like that of select2.js could be 
 added. (this should be possible to turn on or off)
 
@@ -134,7 +134,6 @@ radio button group to avoid binding issues. I.e. all enum values will be shown i
 
 To acheve horizontal stacking, use Blazorise and the CSS class here used with the Style hack in addition. Default is vertical stacking.
 
-
 ### Building this library into a Nuget
 
 Run the following command after bumping Version element value 
@@ -147,5 +146,3 @@ echo of the csproj before pushing to nuget
 dotnet build  --configuration Release
 dotnet pack --configuration Release
 ```
-
-Then upload the .nupkg file from the bin\Release folder of the class library.
