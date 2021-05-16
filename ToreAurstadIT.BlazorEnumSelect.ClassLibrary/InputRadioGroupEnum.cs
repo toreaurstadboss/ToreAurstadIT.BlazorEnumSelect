@@ -92,6 +92,8 @@ namespace ToreAurstadIT.BlazorEnumSelect.ClassLibrary
 
             string compoundCssClassDiv = !string.IsNullOrWhiteSpace(AdditionalCssClassesDiv) ? $"{AdditionalCssClassesDiv} {CssClass}" : CssClass;
     
+            builder.OpenElement(0, "div");
+
             builder.AddContent(2, new RenderFragment((childBuilder) =>
             { 
                 //builder.OpenComponent<InputRadioGroup<TEnum>>(0);
@@ -102,17 +104,33 @@ namespace ToreAurstadIT.BlazorEnumSelect.ClassLibrary
                 string compoundCssClass = !string.IsNullOrWhiteSpace(AdditionalCssClasses) ? $"{AdditionalCssClasses} {CssClass}" : CssClass;
 
                 string compoundCssClassLabel = !string.IsNullOrWhiteSpace(AdditionalCssClassesLabel) ? $"{AdditionalCssClassesLabel} {CssClass}" : CssClass;
+                
+                //TODO: add left and right arrow navigation
 
-                builder.OpenElement(0, "style");
-                builder.AddAttribute(1, "type", "text/css");
-                builder.AddContent(0, "input[type=\"radio\"] { background-color:blue; }");
+                builder.OpenElement(0, "script");
+                builder.AddContent(0, @"
+                function checkKey(e) {
+
+                    e = e || window.event;
+                    console.log(e);
+                    if (e.keyCode == '37') {
+                         console.log('left arrow');
+                    }
+                    if (e.keyCode == '39') {
+                        console.log('right arrow'); 
+                    }
+                }   
+                ");
                 builder.CloseElement();
+
 
                 foreach (var value in EnumValuesSortedNumerically)
                 {
+                    string enumValueSuffix = this.ShowIntValues ? $"{Convert.ToInt32(value)}" : string.Empty;
+
                     childBuilder.OpenElement(0, "div");
                     childBuilder.AddAttribute(0, "class", compoundCssClassDiv);
-                    childBuilder.AddAttribute(6, "onclick", "var $firstRadio = $(this).children('input:first'); if (!!$firstRadio) { $firstRadio.prop('checked', !$firstRadio.prop('checked')); }");
+                    childBuilder.AddAttribute(1, "onclick", "var $firstRadio = $(this).children('input:first'); if (!!$firstRadio) { $firstRadio.prop('checked', !$firstRadio.prop('checked')); }");
 
                     childBuilder.OpenElement(0, "input");
                     childBuilder.AddAttribute(1, "type", "radio");
@@ -134,15 +152,24 @@ namespace ToreAurstadIT.BlazorEnumSelect.ClassLibrary
                     childBuilder.OpenElement(0, "label");
                     childBuilder.AddAttribute(0, "for", value);
                     childBuilder.AddAttribute(1, "class", compoundCssClassLabel);
-                    childBuilder.AddContent(0, GetDisplayName((TEnum)value));
+                    childBuilder.AddContent(0, $"{GetDisplayName((TEnum)value)} ({enumValueSuffix})");
                     childBuilder.CloseElement();
 
                     childBuilder.CloseElement(); //div
+
+                    if (this.StackMode == StackMode.Vertical)
+                    {
+                        //simple vertical stacking - just add br tags
+                        childBuilder.OpenElement(0, "br");
+                        childBuilder.CloseElement();
+                    }
 
                 }
 
 
             }));
+
+            builder.CloseElement();
 
 
             //builder.OpenElement(0, "select");

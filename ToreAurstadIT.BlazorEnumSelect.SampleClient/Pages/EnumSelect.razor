@@ -4,7 +4,7 @@
 @using Blazorise
 
 <EditForm Model="@model">
-    <span>Selected the some enum value: @model.SomeEnum</span>
+    <span>Selected the some enum value: @model.SomeEnum</span> <br />
 
     <span>Selected the some enum second value: @model.SomeEnumSecond</span>
 
@@ -25,11 +25,11 @@
     </ToreAurstadIT.BlazorEnumSelect.ClassLibrary.InputRadioGroupEnum>
 
 
-    <RadioGroup TValue="string" Name="colors">
+@*    <RadioGroup TValue="string" Name="colors">
     <Radio TValue="string" Value="@("red")">Red</Radio>
     <Radio TValue="string" Value="@("green")">Green</Radio>
     <Radio TValue="string" Value="@("blue")">Blue</Radio>
-</RadioGroup>
+</RadioGroup>*@
 
 
     @*<InputRadioGroup @bind-Value="temptest">
@@ -38,9 +38,6 @@
                 <InputRadio Value="option" /> @option <br />
             }
         </InputRadioGroup>*@
-
-
-
 
 </EditForm>
 
