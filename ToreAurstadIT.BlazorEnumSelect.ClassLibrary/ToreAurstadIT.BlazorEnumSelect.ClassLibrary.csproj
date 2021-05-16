@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<TargetFramework>net5.0</TargetFramework>
 		<PackageId>BlazorEnumSelect.ToreAurstadIT</PackageId>
-		<PackageVersion>1.1.0</PackageVersion>
+		<PackageVersion>1.2.0</PackageVersion>
 		<Authors>Tore Aurstad IT</Authors>
 		<PackageReadmeFile>Readme.md</PackageReadmeFile>
 		<PackageIcon>ddl.png</PackageIcon>

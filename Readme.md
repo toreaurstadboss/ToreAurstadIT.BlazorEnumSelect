@@ -2,7 +2,9 @@
 
 License: MIT
 
-![Enum select sample](https://raw.githubusercontent.com/toreaurstadboss/ToreAurstadIT.BlazorEnumSelect/main/enumselectsample2.png)
+Image showing the two input controls /components included in this small library. (The InputRadioGroupEnum control supports vertical and horizontal stacking).
+![Enum select sample](https://raw.githubusercontent.com/toreaurstadboss/ToreAurstadIT.BlazorEnumSelect/main/enumselectsample2.PNG)
+
 
 You can adapt this sample to your convenience. I created this component to learn more about Blazor.
 It is built upon sample code from user meziantou on SO and packaged and added some functionality.
@@ -49,7 +51,7 @@ rendering output:
 |EmptyTextValue|int?|Define the int? value of the enum where we will have empty text (default is null) |
 |AdditionalCssClasses|string|List up css classes separated by space that will be added to the select element. E.g. Blazorise uses 'custom-select' as css class for its select element|
 
-![Enum select sample](https://raw.githubusercontent.com/toreaurstadboss/ToreAurstadIT.BlazorEnumSelect/main/enumselectsample.png)
+![Enum select sample](https://raw.githubusercontent.com/toreaurstadboss/ToreAurstadIT.BlazorEnumSelect/main/enumselectsample2.PNG)
 
 
 ### Sample usage 
