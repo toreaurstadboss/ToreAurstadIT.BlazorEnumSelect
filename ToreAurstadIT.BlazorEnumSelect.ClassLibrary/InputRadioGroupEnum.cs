@@ -13,13 +13,18 @@ using Microsoft.AspNetCore.Components.Rendering;
 namespace ToreAurstadIT.BlazorEnumSelect.ClassLibrary
 {
     /// <summary>
-    /// Enum select control which supports generation of options from enum type of data bound property. 
-    /// Adapted from: <see href="https://www.meziantou.net/creating-a-inputselect-component-for-enumerations-in-blazor.htm" />
+    /// Groups child input radio buttons with tailoring for enum type. Supports data binding and resource files.
+    /// The group can be stacked either horizontally or vertically using the StackMode property on this control
+    /// Enum input radio button group control which supports generation of options from enum type of data bound property. 
+    /// With ideas from: <see href="https://www.meziantou.net/creating-a-inputselect-component-for-enumerations-in-blazor.htm" />
     /// with some additional features. This sample also supports nullable enumerable enum type. <br />
     /// Class is now not sealed in case you want to adapt the enum control more. <br />
     /// <ul>
     ///  <li>The numeric value is sorted ascending numerically</li> <br />
-    ///  <li>Parameter AdditionalCssClasses can be set to a string to customize the css class(es) of the select. E.g. Blazorise uses "custom-select". It is possible to add multiple CSS classes here which will be added to those that InputSelect base class also adds.</li>
+    ///  <li>Parameter StackMode controls whether the controls stacks input radio buttons horizontally or vertically.</li>
+    ///  <li>Parameter AdditionalCssClasses can be set to a string to customize the css class(es) of the input type radio elements. E.g. Blazorise uses "custom-control-input" for radio buttons and same for the wrapping div element. It is possible to add multiple CSS classes here which will be added to those that InputSelect base class also adds.</li>
+    ///  <li>Parameter AdditionalCssClassesLabel sets the css class of the label. E.g. Blazorise uses "custom-control-label".</li>
+    /// <li>Paramter AdditionalCssClassesDiv sets the css class of the div. E.g. Blazorise uses "custom-control custom-radio custom-control-inline"</li>
     ///  Parameter ShowIntValues to show enum value also in the text of option which defaults to true <br />
     /// Parameter EmptyTextValue will if set to non null value will check if the int value is equal to this set empty text for the option element <br />
     /// </ul>
@@ -29,7 +34,7 @@ namespace ToreAurstadIT.BlazorEnumSelect.ClassLibrary
     /// <typeparam name="TEnum"></typeparam>
     public class InputRadioGroupEnum<TEnum> : InputRadioGroup<TEnum>
     {
-
+       
         private CustomInputRadioContext _context;
 
         private readonly string _defaultGroupName = Guid.NewGuid().ToString("N");
@@ -45,6 +50,15 @@ namespace ToreAurstadIT.BlazorEnumSelect.ClassLibrary
         [Parameter]
         public string AdditionalCssClasses { get; set; }
 
+        [Parameter]
+        public string AdditionalCssClassesLabel { get; set; }
+
+        [Parameter]
+        public string AdditionalCssClassesDiv { get; set; }
+
+        [Parameter]
+        public StackMode StackMode { get; set; }
+
         private List<object> EnumValuesSortedNumerically = new List<object>();
 
         protected override void OnParametersSet()
@@ -52,18 +66,14 @@ namespace ToreAurstadIT.BlazorEnumSelect.ClassLibrary
             var groupName = !string.IsNullOrEmpty(Name) ? Name : _defaultGroupName;
             var fieldClass = EditContext.FieldCssClass(FieldIdentifier);
             var changeEventCallback = EventCallback.Factory.CreateBinder<string?>(this, __value => CurrentValueAsString = __value, CurrentValueAsString);
-
             _context = new CustomInputRadioContext(CascadedContextParent, groupName, CurrentValue, fieldClass, changeEventCallback);
         }
 
         // Generate html when the component is rendered.
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-
-
             var enumType = GetEnumType();
             BuildEnumValuesSorted(enumType);
-
 
             //builder.OpenComponent<CascadingValue<CustomInputRadioContext>>(0);
             //builder.SetKey(_context);
@@ -80,25 +90,38 @@ namespace ToreAurstadIT.BlazorEnumSelect.ClassLibrary
 
             //builder.AddAttribute(2, "ValueExpression", this.ValueExpression);
 
-            builder.OpenElement(0, "div");
-
-
+            string compoundCssClassDiv = !string.IsNullOrWhiteSpace(AdditionalCssClassesDiv) ? $"{AdditionalCssClassesDiv} {CssClass}" : CssClass;
+    
             builder.AddContent(2, new RenderFragment((childBuilder) =>
-            {
+            { 
                 //builder.OpenComponent<InputRadioGroup<TEnum>>(0);
                 //builder.AddAttribute(1, "IsFixed", true);
                 //builder.AddAttribute(2, "Value", _context);
                 //builder.AddAttribute(3, "Name", _defaultGroupName);
 
+                string compoundCssClass = !string.IsNullOrWhiteSpace(AdditionalCssClasses) ? $"{AdditionalCssClasses} {CssClass}" : CssClass;
+
+                string compoundCssClassLabel = !string.IsNullOrWhiteSpace(AdditionalCssClassesLabel) ? $"{AdditionalCssClassesLabel} {CssClass}" : CssClass;
+
+                builder.OpenElement(0, "style");
+                builder.AddAttribute(1, "type", "text/css");
+                builder.AddContent(0, "input[type=\"radio\"] { background-color:blue; }");
+                builder.CloseElement();
+
                 foreach (var value in EnumValuesSortedNumerically)
                 {
+                    childBuilder.OpenElement(0, "div");
+                    childBuilder.AddAttribute(0, "class", compoundCssClassDiv);
+                    childBuilder.AddAttribute(6, "onclick", "var $firstRadio = $(this).children('input:first'); if (!!$firstRadio) { $firstRadio.prop('checked', !$firstRadio.prop('checked')); }");
+
                     childBuilder.OpenElement(0, "input");
                     childBuilder.AddAttribute(1, "type", "radio");
                     childBuilder.AddAttribute(2, "name", _defaultGroupName);
                     childBuilder.AddAttribute(3, "value", value);
                     childBuilder.AddAttribute(4, "onchange", EventCallback.Factory.CreateBinder<string>(this, value => CurrentValueAsString = value, CurrentValueAsString, null));
-                    childBuilder.AddContent(1, GetDisplayName((TEnum) value));
-
+                    childBuilder.AddAttribute(5, "class", compoundCssClass);
+                    string newChildId = Guid.NewGuid().ToString("N"); 
+                    childBuilder.AddAttribute(5, "id", newChildId);
 
                     //childBuilder.OpenComponent<InputRadio<TEnum>>(0);
                     ////childBuilder.SetKey(_context);
@@ -110,12 +133,17 @@ namespace ToreAurstadIT.BlazorEnumSelect.ClassLibrary
 
                     childBuilder.OpenElement(0, "label");
                     childBuilder.AddAttribute(0, "for", value);
+                    childBuilder.AddAttribute(1, "class", compoundCssClassLabel);
                     childBuilder.AddContent(0, GetDisplayName((TEnum)value));
                     childBuilder.CloseElement();
+
+                    childBuilder.CloseElement(); //div
+
                 }
+
+
             }));
 
-            builder.CloseElement();
 
             //builder.OpenElement(0, "select");
             //builder.AddMultipleAttributes(1, AdditionalAttributes);

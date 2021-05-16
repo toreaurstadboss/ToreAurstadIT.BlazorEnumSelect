@@ -1,6 +1,7 @@
 ﻿@page "/EnumSelect"
 
 @using  ToreAurstadIT.BlazorEnumSelect.SampleClient.Models
+@using Blazorise
 
 <EditForm Model="@model">
     <span>Selected the some enum value: @model.SomeEnum</span>
@@ -13,11 +14,22 @@
                                                                  AdditionalCssClasses="custom-select">
     </ToreAurstadIT.BlazorEnumSelect.ClassLibrary.InputSelectEnum>
 
-    <ToreAurstadIT.BlazorEnumSelect.ClassLibrary.InputRadioGroupEnum @bind-Value="@model.SomeEnumSecond"
-                                                                     EmptyTextValue="-1" ShowIntValues="true"
-                                                                     AdditionalCssClasses="custom-select">
+    <br /><br />
+
+    <ToreAurstadIT.BlazorEnumSelect.ClassLibrary.InputRadioGroupEnum @bind-Value="@model.SomeEnumSecond" StackMode="StackMode.Horizontal"
+                                                                     EmptyTextValue="-1" ShowIntValues="true"                                                                     
+                                                                     AdditionalCssClassesDiv="custom-control custom-radio custom-control-inline"
+                                                                     AdditionalCssClasses="custom-control-input"
+                                                                     AdditionalCssClassesLabel="custom-control-label"
+                                                                >
     </ToreAurstadIT.BlazorEnumSelect.ClassLibrary.InputRadioGroupEnum>
 
+
+    <RadioGroup TValue="string" Name="colors">
+    <Radio TValue="string" Value="@("red")">Red</Radio>
+    <Radio TValue="string" Value="@("green")">Green</Radio>
+    <Radio TValue="string" Value="@("blue")">Blue</Radio>
+</RadioGroup>
 
 
     @*<InputRadioGroup @bind-Value="temptest">
