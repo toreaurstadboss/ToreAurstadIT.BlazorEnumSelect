@@ -6,5 +6,7 @@
 
         public SomeEnum SomeEnumSecond { get; set; }
 
+        public SomeEnum SomeEnumThird { get; set; }
+
     }
 }

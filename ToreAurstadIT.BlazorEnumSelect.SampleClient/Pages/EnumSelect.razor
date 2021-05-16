@@ -4,10 +4,23 @@
 @using Blazorise
 
 <EditForm Model="@model">
+
+   <h4>Edit form model state: </h4>
+
+
     <span>Selected the some enum value: @model.SomeEnum</span> <br />
 
-    <span>Selected the some enum second value: @model.SomeEnumSecond</span>
+    <span>Selected the some enum second value: @model.SomeEnumSecond</span> <br />
 
+    <span>Selected the some enum third value: @model.SomeEnumThird</span> <br />
+
+        <br />
+        <br />
+
+        <h4>Demo controls:</h4>
+
+
+        <h5>Enum select control:</h5>
 
     <ToreAurstadIT.BlazorEnumSelect.ClassLibrary.InputSelectEnum @bind-Value="@model.SomeEnum"
                                                                  EmptyTextValue="-1" ShowIntValues="true"
@@ -16,28 +29,18 @@
 
     <br /><br />
 
+    <h5>Enum radio button group control: horizontal stacking (Requires Blazorise added)</h5>
+    <em>For better visual display, add this parameter:  AdditionalCssStyleLabel="position:relative;top:-5px;" </em>
     <ToreAurstadIT.BlazorEnumSelect.ClassLibrary.InputRadioGroupEnum @bind-Value="@model.SomeEnumSecond" StackMode="StackMode.Horizontal"
-                                                                     EmptyTextValue="-1" ShowIntValues="true"                                                                     
-                                                                     AdditionalCssClassesDiv="custom-control custom-radio custom-control-inline"
-                                                                     AdditionalCssClasses="custom-control-input"
-                                                                     AdditionalCssClassesLabel="custom-control-label"
-                                                                >
+                                                                     EmptyTextValue="-1" ShowIntValues="true"                                       
+                                                                     AdditionalCssStyleLabel="position:relative;top:-5px;">
     </ToreAurstadIT.BlazorEnumSelect.ClassLibrary.InputRadioGroupEnum>
 
+    <h5>Enum radio button group control - vertical stacking</h5>
+        <ToreAurstadIT.BlazorEnumSelect.ClassLibrary.InputRadioGroupEnum @bind-Value="@model.SomeEnumThird" StackMode="StackMode.Vertical"
+                                                                     EmptyTextValue="-1" ShowIntValues="true"                                                                  >
+    </ToreAurstadIT.BlazorEnumSelect.ClassLibrary.InputRadioGroupEnum>
 
-@*    <RadioGroup TValue="string" Name="colors">
-    <Radio TValue="string" Value="@("red")">Red</Radio>
-    <Radio TValue="string" Value="@("green")">Green</Radio>
-    <Radio TValue="string" Value="@("blue")">Blue</Radio>
-</RadioGroup>*@
-
-
-    @*<InputRadioGroup @bind-Value="temptest">
-            @foreach (var option in rdOptions)
-            {
-                <InputRadio Value="option" /> @option <br />
-            }
-        </InputRadioGroup>*@
 
 </EditForm>
 

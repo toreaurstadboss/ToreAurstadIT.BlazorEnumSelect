@@ -20,7 +20,7 @@
 
 	<ItemGroup>
 		<None Include="..\Readme.md" pack="true" PackagePath="" />
-		<None Include="..\enumselectsample.png" pack="true" PackagePath="" />
+		<None Include="..\enumselectsample2.png" pack="true" PackagePath="" />
 		<None Include="..\ddl.png" pack="true" PackagePath="" />
 	</ItemGroup>
 
