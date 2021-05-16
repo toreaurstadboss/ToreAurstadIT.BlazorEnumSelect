@@ -16,10 +16,6 @@ and a class library with an enum select control, i.e. a customized InputSelect c
 for an enum property of a model you pass in - this custom controls supports data binding since it 
 inherits from the InputSelect control of Blazor and just adds more functionality to it.
 
-The adapted functionality is to display the enum value, to sort the int values of the enum values ascending,
-to allow specifying an enum value with empty text and allow you to pass in the additional css class(es) to 
-adapt the look of the select element of this control. For example, to use the Blazorise look, you can set the 
-enum value "custom-select", after adding Blazorise into your WASM app. This is shown in the sample client.
 
 This package now also includes an input radio button group control for enums.
 
@@ -101,7 +97,6 @@ rendering output:
 |AdditionalCssClasses|string|List up css classes separated by space that will be added to the input radio element. E.g. Blazorise uses 'custom-control-input' as css class for its select element. But for now - do not use this css class as it gives errors. See sample instead for correct use of this control.|
 |AdditionalCssClassesLabel|string|List up css classes separated by space that will be added to the label for the input radio element. E.g. Blazorise uses 'custom-control-label' as css class for its select element. But for now - do not use this css class as it gives errors. See sample instead for correct use of this control.|
 |AdditionalCssClassesStyle|string|Css specific style that will be added to the label for the input radio element. See sample instead for correct use of this control.|
-
 
 ### Sample usage 
 
